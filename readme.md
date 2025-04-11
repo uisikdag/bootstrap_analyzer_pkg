@@ -26,11 +26,10 @@ of samples can be configured.
 
 2.  Option B: **Install using pip:**
 
- <br>Step A:
-     ```
+    ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     ```
-<br>Step B:     
+    
 * download synthetic_bootstrap_data.csv to the same folder with the code below
 * copy/paste the code below to an editor > save as "rae.py" > python rae.py
 
@@ -92,7 +91,7 @@ except Exception as e:
 # except Exception as e:
 #     print(f"Failed to load results: {e}")
 ```
-<br> Step C:
+
 * copy/paste the code below to an editor> save as "mma.py" > pythob mma.py
 
 ```
