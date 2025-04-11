@@ -20,7 +20,7 @@ of samples can be configured.
     ```
     git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     cd bootstrap_analyzer_pkg/examples
-    python run_analysis_example.py
+    python prepare_bootstrap_samples.py
     python make_ml_analysis.py
     ```
 
@@ -31,7 +31,7 @@ of samples can be configured.
     ```
     
 * download synthetic_bootstrap_data.csv to the same folder with the code below
-* copy/paste the code below to an editor > save as "rae.py" > python rae.py
+* copy/paste the code below to an editor > save as "pbs.py" > python pbs.py
 
 ```python
 from bootstrap_analyzer import run_bootstrap_analysis
