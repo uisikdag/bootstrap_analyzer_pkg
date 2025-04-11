@@ -14,14 +14,14 @@ A Python package for analyzing data features and generating (stratified) bootstr
 
 ## Installation
 
-1.  **Clone the repository (if applicable):**
+1.  Option A: **Clone the repository (if applicable):**
     ```
     git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     cd bootstrap_analyzer_pkg/examples
     python run_analysis_example.py
     ```
 
-2.  **Install using pip:**
+2.  Option B: **Install using pip:**
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     #read the Usage 
