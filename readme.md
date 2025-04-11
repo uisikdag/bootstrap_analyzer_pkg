@@ -24,7 +24,6 @@ A Python package for analyzing data features and generating (stratified) bootstr
 2.  Option B: **Install using pip:**
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
-    #read the Usage 
     ```
 * download synthetic_bootstrap_data.csv to the same folder with Example Usage Code
 * copy/paste  Example Usage Code code to an editor and save as "euc.py"
@@ -32,8 +31,6 @@ A Python package for analyzing data features and generating (stratified) bootstr
 ## Example Usage Code
 
 ```python
-
- 
 from bootstrap_analyzer import run_bootstrap_analysis, load_bootstrap_results
 import pandas as pd # Needed to display results if desired
 import os
@@ -42,6 +39,7 @@ import os
 INPUT_CSV = "synthetic_bootstrap_data.csv" # REQUIRED: Update this path
 RESULTS_FILE = "analysis_output.pkl" # Optional: Path to save/load results
 
+# --- Path Settings ---
 current_working_directory = os.getcwd()
 full_path_csv = os.path.join(current_working_directory, INPUT_CSV)
 
@@ -57,8 +55,8 @@ try:
         csv_filepath=full_path_csv,
         x_cols=X_COLUMNS,           
         y_cols=Y_COLUMNS,
-        n_samples=100,           # Generate 100 bootstrap samples
-        bootstrap_sample_size=None, # Use full original size for samples ; =1000 will generate data samples with 1000 rows each
+        n_samples=50,           # Generate 50 bootstrap samples
+        bootstrap_sample_size=100, # generate bootstrap samples with 100 rows each; None: Use full original size of input data for the samples ;
         stratify_by='X',         # Stratify based on categorical features in X_COLS; 'Y','both' are other options
         random_state=42,         # For reproducible results
         save_results_path=RESULTS_FILE # Save the output
