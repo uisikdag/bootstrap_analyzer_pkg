@@ -18,7 +18,7 @@ A Python package for analyzing data features and generating (stratified) bootstr
     ```
     git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     cd bootstrap_analyzer_pkg/examples
-    python3 run_analysis_example.py
+    python run_analysis_example.py
     ```
 
 2.  **Install using pip:**
