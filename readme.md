@@ -16,7 +16,7 @@ of samples can be configured.
 
 ## Installation
 
-1.  **Option A:Install using Clone**
+1.  **Option A: pip clone**
     ```
     git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     cd bootstrap_analyzer_pkg/examples
@@ -24,7 +24,7 @@ of samples can be configured.
     python make_ml_analysis.py
     ```
 
-2.  **Option B:Install using pip:**
+2.  **Option B: pip install:**
 
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
