@@ -15,11 +15,11 @@ from .core import analyze_and_bootstrap_v3
 
 # ----------------------------------------------------------
 # Wrapper Function to Run Analysis from CSV
+# (Determines X/Y columns based on the number of trailing Y columns specified)
 # ----------------------------------------------------------
 def run_bootstrap_analysis(
     csv_filepath: str,
-    x_cols: List[str],
-    y_cols: List[str],
+    num_y_cols: int, # New parameter: Number of columns from the end to treat as Y
     n_samples: int,
     bootstrap_sample_size: Optional[int] = None,
     stratify_by: str = 'X',
@@ -29,15 +29,19 @@ def run_bootstrap_analysis(
     save_results_path: Optional[str] = None
 ) -> Optional[Dict[str, Union[Dict, List[pd.DataFrame]]]]:
     """
-    Reads data from a CSV file, runs the bootstrap analysis, and optionally saves results.
+    Reads data from a CSV file, identifies Y variables as the last 'num_y_cols'
+    columns and X variables as the preceding columns from the header, runs the
+    bootstrap analysis, and optionally saves results.
 
     Args:
         csv_filepath: Path to the input CSV file.
-        x_cols: List of independent variable column names.
-        y_cols: List of dependent variable column names.
+        num_y_cols: The number of columns, counting from the end of the file,
+                    to be treated as dependent (Y) variables. Must be at least 1.
         n_samples: Number of bootstrap samples to generate.
         bootstrap_sample_size: Desired size for each bootstrap sample (optional).
+                               Defaults to original data size if None.
         stratify_by: Stratification strategy ('X', 'Y', 'both', 'none').
+                     Defaults to 'X'.
         categorical_threshold: Threshold for numeric features to be categorical.
         random_state: Seed for reproducibility.
         read_csv_options: Dictionary of additional kwargs for pd.read_csv.
@@ -50,7 +54,9 @@ def run_bootstrap_analysis(
 
     Raises:
         FileNotFoundError, pd.errors.EmptyDataError, Exception: From file reading.
-        ValueError, TypeError: From analyze_and_bootstrap_v3 validation.
+        ValueError: If num_y_cols is invalid, CSV has too few columns, or other
+                    validation issues.
+        TypeError: From analyze_and_bootstrap_v3 validation.
         IOError, pickle.PicklingError: If saving results fails.
     """
     print(f"Attempting to read data from: {csv_filepath}")
@@ -65,17 +71,45 @@ def run_bootstrap_analysis(
         print(f"Error reading CSV file '{csv_filepath}': {e}")
         raise
 
+    # --- Determine X and Y columns based on num_y_cols ---
+    all_cols = df.columns.tolist()
+    total_cols = len(all_cols)
+
+    # Validate num_y_cols
+    if not isinstance(num_y_cols, int) or num_y_cols < 1:
+        raise ValueError(f"`num_y_cols` must be a positive integer. Received: {num_y_cols}")
+    if num_y_cols >= total_cols:
+        raise ValueError(f"`num_y_cols` ({num_y_cols}) cannot be greater than or equal to the total number of columns ({total_cols}). Must leave at least one X column.")
+
+    y_cols_auto = all_cols[-num_y_cols:]  # Get the last 'num_y_cols' columns
+    x_cols_auto = all_cols[:-num_y_cols]   # Get all columns before the Y columns
+
+    print(f"Automatically detected X columns: {x_cols_auto}")
+    print(f"Automatically detected Y columns ({num_y_cols} trailing): {y_cols_auto}")
+    # --- End of automatic detection ---
+
     adjusted_sample_size = bootstrap_sample_size
     if bootstrap_sample_size is not None and bootstrap_sample_size > len(df):
          print(f"Warning: Requested bootstrap sample size ({bootstrap_sample_size}) > data size ({len(df)}). Using data size.")
+         # Adjust sample size if it's larger than the dataset size
          adjusted_sample_size = len(df)
 
-    print(f"\nRunning bootstrap analysis with {n_samples} samples...")
-    # Call the core function from .core
+    # Use original dataframe size if bootstrap_sample_size is None
+    effective_sample_size = adjusted_sample_size if adjusted_sample_size is not None else len(df)
+
+
+    print(f"\nRunning bootstrap analysis with {n_samples} samples of size {effective_sample_size}...")
+    # Call the core function from .core using automatically determined columns
     results = analyze_and_bootstrap_v3(
-        df=df, x_cols=x_cols, y_cols=y_cols, n_samples=n_samples,
-        bootstrap_sample_size=adjusted_sample_size, stratify_by=stratify_by,
-        categorical_threshold=categorical_threshold, random_state=random_state
+        df=df,
+        x_cols=x_cols_auto,  # Use automatically determined X columns
+        y_cols=y_cols_auto,  # Use automatically determined Y columns
+        n_samples=n_samples,
+        # Pass the potentially adjusted or original size to the core function
+        bootstrap_sample_size=effective_sample_size if bootstrap_sample_size is not None else None,
+        stratify_by=stratify_by,
+        categorical_threshold=categorical_threshold,
+        random_state=random_state
     )
     print("Bootstrap analysis completed.")
 
@@ -93,7 +127,7 @@ def run_bootstrap_analysis(
     return results
 
 # ----------------------------------------------------------
-# Function to Load Saved Results
+# Function to Load Saved Results (Unchanged)
 # ----------------------------------------------------------
 def load_bootstrap_results(filepath: str) -> Dict[str, Union[Dict, List[pd.DataFrame]]]:
     """

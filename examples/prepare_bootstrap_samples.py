@@ -27,6 +27,7 @@ full_path_csv = os.path.join(current_working_directory, INPUT_CSV)
 X_COLUMNS = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
 Y_COLUMNS = ['churn_risk', 'lifetime_value']
 
+
 # Bootstrap settings
 NUM_BOOTSTRAP_SAMPLES = 50
 BOOTSTRAP_SIZE = 100      # Custom size for samples
@@ -48,8 +49,7 @@ try:
     print("\nRunning bootstrap analysis...")
     results = run_bootstrap_analysis(
         csv_filepath=INPUT_CSV,
-        x_cols=X_COLUMNS,
-        y_cols=Y_COLUMNS,
+        num_y_cols=len(Y_COLUMNS),  # Specify number of Y columns instead of listing them
         n_samples=NUM_BOOTSTRAP_SAMPLES,
         bootstrap_sample_size=BOOTSTRAP_SIZE,
         stratify_by=STRATIFICATION_METHOD,
