@@ -1,14 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 11 10:11:22 2025
-
-@author: umit
-"""
-
-
-
-# examples/run_analysis_example.py
-
 # Import functions from the installed package
 from bootstrap_analyzer import run_bootstrap_analysis, load_bootstrap_results
 import pandas as pd # Import pandas to work with results if needed
@@ -48,7 +37,7 @@ try:
     # --- Run Analysis & Save Results ---
     print("\nRunning bootstrap analysis...")
     results = run_bootstrap_analysis(
-        csv_filepath=INPUT_CSV,
+        csv_filepath=full_path_csv,
         num_y_cols=len(Y_COLUMNS),  # Specify number of Y columns instead of listing them
         n_samples=NUM_BOOTSTRAP_SAMPLES,
         bootstrap_sample_size=BOOTSTRAP_SIZE,

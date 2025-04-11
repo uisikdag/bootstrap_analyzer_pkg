@@ -30,13 +30,31 @@ def load_bootstrap_results(filepath):
     with open(filepath, 'rb') as f:
         results = pickle.load(f)
     return results
-
+#---------------------------------------------------------------------------------------------------------------------
 RESULTS_FILE = "analysis_output.pkl" # Path where results were saved
 # These columns are defined here just for initial setup/loading,
 # the actual columns used will come from the loaded results.
 X_COLUMNS_DEFAULT = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
 Y_COLUMNS_DEFAULT = ['churn_risk', 'lifetime_value']
 
+# --- Configuration ---
+# <<< CHOOSE ONE TARGET VARIABLE from Y_COLUMNS list >>>
+TARGET_VARIABLE = 'churn_risk'
+# TARGET_VARIABLE = 'lifetime_value' # Example: Uncomment this to test regression
+
+# --- *** USER INPUT REQUIRED: Define Preprocessing for X Columns *** ---
+# Map each column in X_COLUMNS to 'categorical', 'label', or 'numeric'
+feature_processing_map = {
+    'region': 'categorical',      # Will be OneHotEncoded (with drop='first')
+    'product_code': 'categorical',# Will be OneHotEncoded (with drop='first')
+    'is_priority': 'label',       # Will be LabelEncoded (0, 1, 2...)
+    'avg_monthly_spend': 'numeric', # Will be MinMaxScaled (0-1)
+    'satisfaction_score': 'numeric' # Will be MinMaxScaled (0-1)
+    # Add all columns from X_COLUMNS here!
+}
+# --- End User Input ---
+
+#-------------------------------------------------------------------------------------------------------------------
 results = None
 try:
     if os.path.exists(RESULTS_FILE):
@@ -59,23 +77,6 @@ except Exception as e:
 # --- ML Analysis with User-Defined Preprocessing ---
 if results and results.get('bootstrap_samples'):
     print("\n--- Starting ML Analysis with User-Defined Preprocessing ---")
-
-    # --- Configuration ---
-    # <<< CHOOSE ONE TARGET VARIABLE from Y_COLUMNS list >>>
-    TARGET_VARIABLE = 'churn_risk'
-    # TARGET_VARIABLE = 'lifetime_value' # Example: Uncomment this to test regression
-
-    # --- *** USER INPUT REQUIRED: Define Preprocessing for X Columns *** ---
-    # Map each column in X_COLUMNS to 'categorical', 'label', or 'numeric'
-    feature_processing_map = {
-        'region': 'categorical',      # Will be OneHotEncoded (with drop='first')
-        'product_code': 'categorical',# Will be OneHotEncoded (with drop='first')
-        'is_priority': 'label',       # Will be LabelEncoded (0, 1, 2...)
-        'avg_monthly_spend': 'numeric', # Will be MinMaxScaled (0-1)
-        'satisfaction_score': 'numeric' # Will be MinMaxScaled (0-1)
-        # Add all columns from X_COLUMNS here!
-    }
-    # --- End User Input ---
 
     # --- Validate User Input ---
     if TARGET_VARIABLE not in Y_COLUMNS:
