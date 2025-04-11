@@ -32,3 +32,7 @@ of samples can be configured.
      ```
     python prep_and_test_ml.py
     ```
+3. **Uninstall**
+   ```
+   pip uninstall bootstrap_analyzer
+   ```
