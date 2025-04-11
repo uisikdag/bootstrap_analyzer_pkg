@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 11 10:10:23 2025
-
-@author: umit
-"""
-
 # Bootstrap Analyzer
 
 A Python package for analyzing data features and generating (stratified) bootstrap samples from tabular data stored in CSV files.
@@ -37,6 +30,9 @@ A Python package for analyzing data features and generating (stratified) bootstr
 
     # Install the package
     pip install .
+    ```
+    ```
+    pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     ```
     This command reads `setup.py` and installs the package and its dependencies listed in `requirements.txt`.
 
