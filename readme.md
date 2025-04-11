@@ -15,26 +15,16 @@ A Python package for analyzing data features and generating (stratified) bootstr
 ## Installation
 
 1.  **Clone the repository (if applicable):**
-    ```bash
-    git clone [https://github.com/uisikdag/bootstrap_analyzer_pkg.git](https://github.com/uisikdag/bootstrap_analyzer_pkg.git) # Replace with actual URL if hosted
+    ```
+    git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git # Replace with actual URL if hosted
     cd bootstrap_analyzer_pkg
     ```
 
 2.  **Install using pip:**
-    It's recommended to install in a virtual environment.
-
-    ```bash
-    # Create and activate a virtual environment (optional)
-    # python -m venv venv
-    # source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-
-    # Install the package
-    pip install .
-    ```
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     ```
-    This command reads `setup.py` and installs the package and its dependencies listed in `requirements.txt`.
+
 
 ## Usage
 
