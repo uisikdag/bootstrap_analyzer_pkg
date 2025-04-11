@@ -24,35 +24,38 @@ A Python package for analyzing data features and generating (stratified) bootstr
 2.  **Install using pip:**
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
+    #read the Usage 
     ```
-
 
 ## Usage
 
 ```python
-#paste this code to an editor and save as "example/analysis_example.py"
-#download synthetic_bootstrap_data.csv to the same level with example folder
-
+#download synthetic_bootstrap_data.csv to the same folder with this code
+#paste this code to an editor and save as "analysis_example_manual.py"
  
 from bootstrap_analyzer import run_bootstrap_analysis, load_bootstrap_results
 import pandas as pd # Needed to display results if desired
+import os
 
 # --- Parameters ---
 INPUT_CSV = "synthetic_bootstrap_data.csv" # REQUIRED: Update this path
 RESULTS_FILE = "analysis_output.pkl" # Optional: Path to save/load results
 
-# Define which columns are independent (X) and dependent (Y) variables
-# REQUIRED: Update these lists to match your data.csv
-X_COLS = ['feature1', 'feature2_cat', 'feature3_num']
-Y_COLS = ['target_variable', 'other_outcome']
+current_working_directory = os.getcwd()
+full_path_csv = os.path.join(current_working_directory, INPUT_CSV)
+
+# Define column names expected in the CSV
+# IMPORTANT: Update these lists if using a different CSV file
+X_COLUMNS = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
+Y_COLUMNS = ['churn_risk', 'lifetime_value']
 
 # --- Run Analysis ---
 try:
     # Run analysis and save the results
     results = run_bootstrap_analysis(
-        csv_filepath=INPUT_CSV,
-        x_cols=X_COLS,           
-        y_cols=Y_COLS,
+        csv_filepath=full_path_csv,
+        x_cols=X_COLUMNS,           
+        y_cols=Y_COLUMNS,
         n_samples=100,           # Generate 100 bootstrap samples
         bootstrap_sample_size=None, # Use full original size for samples ; =1000 will generate data samples with 1000 rows each
         stratify_by='X',         # Stratify based on categorical features in X_COLS; 'Y','both' are other options
@@ -86,3 +89,4 @@ except Exception as e:
 #     print(f"Number of samples in loaded results: {len(loaded_results['bootstrap_samples'])}")
 # except Exception as e:
 #     print(f"Failed to load results: {e}")
+```
