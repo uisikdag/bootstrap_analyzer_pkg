@@ -1,4 +1,4 @@
-# Bootstrap Analyzer
+# Stratified Bootstrap Sample Generator
 
 A Python package for generating (stratified) bootstrap samples from tabular data stored in CSV files.Stratificarion
 is done using categories of 'X' columns or 'Y' columns or 'both'. The sample size can be smaller than the data size,number
