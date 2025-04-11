@@ -16,7 +16,7 @@ of samples can be configured.
 
 ## Installation
 
-1.  Option A: **Clone the repository (if applicable):**
+1.  Option A: **Install using Clone**
     ```
     git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     cd bootstrap_analyzer_pkg/examples
@@ -25,13 +25,13 @@ of samples can be configured.
     ```
 
 2.  Option B: **Install using pip:**
+
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     ```
+    
 * download synthetic_bootstrap_data.csv to the same folder with the code below
-* copy/paste the code to an editor and save as "rae.py" and Run
-
-## Run Anaylsis Example
+* copy/paste the code below to an editor > save as "rae.py" > python rae.py
 
 ```python
 from bootstrap_analyzer import run_bootstrap_analysis
@@ -91,8 +91,9 @@ except Exception as e:
 # except Exception as e:
 #     print(f"Failed to load results: {e}")
 ```
-* copy/paste the code below to an editor and save as "mma.py" and Run
-## Make ML Analysis
+
+* copy/paste the code below to an editor> save as "mma.py" > pythob mma.py
+
 ```
 # --- Assume previous code ran and produced 'results' ---
 # --- Or load 'results' if available ---
