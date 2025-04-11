@@ -19,14 +19,15 @@ A Python package for analyzing data features and generating (stratified) bootstr
     git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     cd bootstrap_analyzer_pkg/examples
     python run_analysis_example.py
+    python make_ml_analysis.py
     ```
 
 2.  Option B: **Install using pip:**
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     ```
-* download synthetic_bootstrap_data.csv to the same folder with Example Usage Code
-* copy/paste  Example Usage Code code to an editor and save as "rae.py"
+* download synthetic_bootstrap_data.csv to the same folder with the code below
+* copy/paste the code to an editor and save as "rae.py" and Run
 
 ## Run Anaylsis Example
 
@@ -88,6 +89,7 @@ except Exception as e:
 # except Exception as e:
 #     print(f"Failed to load results: {e}")
 ```
+* copy/paste the code below to an editor and save as "mma.py" and Run
 ## Make ML Analysis
 ```
 # --- Assume previous code ran and produced 'results' ---
