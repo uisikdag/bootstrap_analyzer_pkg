@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, MinMaxScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
 from sklearn.metrics import accuracy_score, r2_score
 import warnings
 from sklearn.exceptions import DataConversionWarning
@@ -34,23 +34,42 @@ def load_bootstrap_results(filepath):
 RESULTS_FILE = "analysis_output.pkl" # Path where results were saved
 # These columns are defined here just for initial setup/loading,
 # the actual columns used will come from the loaded results.
-X_COLUMNS_DEFAULT = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
-Y_COLUMNS_DEFAULT = ['churn_risk', 'lifetime_value']
+
+# X_COLUMNS_DEFAULT = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
+# Y_COLUMNS_DEFAULT = ['churn_risk', 'lifetime_value']
+
+
+X_COLUMNS_DEFAULT = ['sl','sw','pl','pw']
+Y_COLUMNS_DEFAULT = ['class']
+
 
 # --- Configuration ---
 # <<< CHOOSE ONE TARGET VARIABLE from Y_COLUMNS list >>>
-TARGET_VARIABLE = 'churn_risk'
+# TARGET_VARIABLE = 'churn_risk'
 # TARGET_VARIABLE = 'lifetime_value' # Example: Uncomment this to test regression
+
+TARGET_VARIABLE = 'class'
+
 
 # --- *** USER INPUT REQUIRED: Define Preprocessing for X Columns *** ---
 # Map each column in X_COLUMNS to 'categorical', 'label', or 'numeric'
 feature_processing_map = {
-    'region': 'categorical',      # Will be OneHotEncoded (with drop='first')
-    'product_code': 'categorical',# Will be OneHotEncoded (with drop='first')
-    'is_priority': 'label',       # Will be LabelEncoded (0, 1, 2...)
-    'avg_monthly_spend': 'numeric', # Will be MinMaxScaled (0-1)
-    'satisfaction_score': 'numeric' # Will be MinMaxScaled (0-1)
-    # Add all columns from X_COLUMNS here!
+    # 'region': 'categorical',      # Will be OneHotEncoded (with drop='first')
+    # 'product_code': 'categorical',# Will be OneHotEncoded (with drop='first')
+    # 'is_priority': 'label',       # Will be LabelEncoded (0, 1, 2...)
+    # 'avg_monthly_spend': 'numeric', # Will be MinMaxScaled (0-1)
+    # 'satisfaction_score': 'numeric' # Will be MinMaxScaled (0-1)
+    # # Add all columns from X_COLUMNS here!
+    
+    
+    'sl': 'numeric',      
+    'sw': 'numeric',       
+    'pl': 'numeric',     # Will be LabelEncoded (0, 1, 2...)
+    'pw': 'numeric',    # Will be MinMaxScaled (0-1)
+     # Add all columns from X_COLUMNS here!
+    
+    
+    
 }
 # --- End User Input ---
 
@@ -115,16 +134,16 @@ if results and results.get('bootstrap_samples'): # Check results again after val
         # --- Select Model and Metric based on Task Type ---
         if task_type == 'classification':
             # Note: LogisticRegression handles potential label encoded features fine.
-            model = LogisticRegression(solver='liblinear', random_state=42)
+            model = RandomForestClassifier(random_state=42)
             metric_func = accuracy_score
             metric_name = "Accuracy"
-            print(f"\nTask Type: Classification (using LogisticRegression, Metric: {metric_name})")
+            print(f"\nTask Type: Classification (using Random Forest Classifier, Metric: {metric_name})")
             stratify_split = True
         else: # Regression
-            model = LinearRegression()
+            model = RandomForestRegressor(random_state=42)
             metric_func = r2_score
             metric_name = "R-squared"
-            print(f"\nTask Type: Regression (using LinearRegression, Metric: {metric_name})")
+            print(f"\nTask Type: Regression (using Random Forest Regressor, Metric: {metric_name})")
             stratify_split = False
 
         # --- Create Preprocessor using ColumnTransformer ---

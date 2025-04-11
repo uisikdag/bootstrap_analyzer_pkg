@@ -4,7 +4,11 @@ import pandas as pd # Import pandas to work with results if needed
 import os # To construct file paths relative to this script
 
 # --- Parameters ---
-INPUT_CSV = "synthetic_bootstrap_data.csv" # REQUIRED: Update this path
+# INPUT_CSV = "synthetic_bootstrap_data.csv" # REQUIRED: Update this path
+
+INPUT_CSV = "iris2.csv" # REQUIRED: Update this path
+
+
 RESULTS_FILE = "analysis_output.pkl" # Optional: Path to save/load results
 
 # --- Path Settings ---
@@ -13,14 +17,18 @@ full_path_csv = os.path.join(current_working_directory, INPUT_CSV)
 
 # Define column names expected in the CSV
 # IMPORTANT: Update these lists if using a different CSV file
-X_COLUMNS = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
-Y_COLUMNS = ['churn_risk', 'lifetime_value']
 
+#X_COLUMNS = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
+#Y_COLUMNS = ['churn_risk', 'lifetime_value']
+
+X_COLUMNS = ['sl','sw','pl','pw']
+Y_COLUMNS = ['class']
 
 # Bootstrap settings
-NUM_BOOTSTRAP_SAMPLES = 50
+NUM_BOOTSTRAP_SAMPLES = 500
 BOOTSTRAP_SIZE = 100      # Custom size for samples
-STRATIFICATION_METHOD = 'X'
+#STRATIFICATION_METHOD = 'X'
+STRATIFICATION_METHOD = 'Y'
 RANDOM_SEED = 123
 
 print("--- Starting Bootstrap Analysis Example ---")
