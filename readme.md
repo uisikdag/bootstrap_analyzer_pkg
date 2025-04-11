@@ -30,8 +30,9 @@ A Python package for analyzing data features and generating (stratified) bootstr
 ## Usage
 
 ```python
-#download synthetic_bootstrap_data.csv to the same folder with this code
-#paste this code to an editor and save as "analysis_example.py"
+#paste this code to an editor and save as "example/analysis_example.py"
+#download synthetic_bootstrap_data.csv to the same level with example folder
+
  
 from bootstrap_analyzer import run_bootstrap_analysis, load_bootstrap_results
 import pandas as pd # Needed to display results if desired
