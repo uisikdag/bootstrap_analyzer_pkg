@@ -16,7 +16,7 @@ of samples can be configured.
 
 ## Installation
 
-1.  **Option A: pip clone**
+1.  **Option A: git clone**
     ```
     git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     cd bootstrap_analyzer_pkg/examples
