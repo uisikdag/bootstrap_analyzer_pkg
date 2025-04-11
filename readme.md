@@ -24,7 +24,7 @@ of samples can be configured.
     python make_ml_analysis.py
     ```
 
-2.  **Option B: pip install:**
+2.  **Option B: pip install**
 
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
