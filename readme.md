@@ -25,6 +25,7 @@ of samples can be configured.
     ```
 
 2.  Option B: **Install using pip:**
+
 Step A:
      ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
