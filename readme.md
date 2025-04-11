@@ -29,6 +29,6 @@ of samples can be configured.
     ```
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     ```
-    download all files > bootstrap_analyzer_pkg/examples \n
-    python prepare_bootstrap_samples.py \n
+    download all files > bootstrap_analyzer_pkg/examples\
+    python prepare_bootstrap_samples.py\
     python make_ml_analysis.py
