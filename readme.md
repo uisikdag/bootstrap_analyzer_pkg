@@ -1,6 +1,8 @@
 # Bootstrap Analyzer
 
-A Python package for analyzing data features and generating (stratified) bootstrap samples from tabular data stored in CSV files.
+A Python package for generating (stratified) bootstrap samples from tabular data stored in CSV files.Stratificarion
+is done using categories of 'X' columns or 'Y' columns or 'both'. The sample size can be smaller than the data size,number
+of samples can be configured.
 
 ## Features
 
