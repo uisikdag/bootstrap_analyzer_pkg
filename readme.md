@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 11 10:10:23 2025
-
-@author: umit
-"""
-
 # Bootstrap Analyzer
 
 A Python package for analyzing data features and generating (stratified) bootstrap samples from tabular data stored in CSV files.
@@ -21,50 +14,49 @@ A Python package for analyzing data features and generating (stratified) bootstr
 
 ## Installation
 
-1.  **Clone the repository (if applicable):**
-    ```bash
-    git clone [https://github.com/uisikdag/bootstrap_analyzer_pkg.git](https://github.com/uisikdag/bootstrap_analyzer_pkg.git) # Replace with actual URL if hosted
-    cd bootstrap_analyzer_pkg
+1.  Option A: **Clone the repository (if applicable):**
+    ```
+    git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
+    cd bootstrap_analyzer_pkg/examples
+    python run_analysis_example.py
     ```
 
-2.  **Install using pip:**
-    It's recommended to install in a virtual environment.
-
-    ```bash
-    # Create and activate a virtual environment (optional)
-    # python -m venv venv
-    # source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-
-    # Install the package
-    pip install .
+2.  Option B: **Install using pip:**
     ```
-    This command reads `setup.py` and installs the package and its dependencies listed in `requirements.txt`.
+    pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
+    ```
+* download synthetic_bootstrap_data.csv to the same folder with Example Usage Code
+* copy/paste  Example Usage Code code to an editor and save as "euc.py"
 
-## Usage
+## Example Usage Code
 
 ```python
-from bootstrap_analyzer import run_bootstrap_analysis, load_bootstrap_results
-import pandas as pd # Needed to display results if desired
+from bootstrap_analyzer import run_bootstrap_analysis
+import os
 
 # --- Parameters ---
-INPUT_CSV = "path/to/your/data.csv" # REQUIRED: Update this path
+INPUT_CSV = "synthetic_bootstrap_data.csv" # REQUIRED: Update this path
 RESULTS_FILE = "analysis_output.pkl" # Optional: Path to save/load results
 
-# Define which columns are independent (X) and dependent (Y) variables
-# REQUIRED: Update these lists to match your data.csv
-X_COLS = ['feature1', 'feature2_cat', 'feature3_num']
-Y_COLS = ['target_variable', 'other_outcome']
+# --- Path Settings ---
+current_working_directory = os.getcwd()
+full_path_csv = os.path.join(current_working_directory, INPUT_CSV)
+
+# Define column names expected in the CSV
+# IMPORTANT: Update these lists if using a different CSV file
+X_COLUMNS = ['region', 'product_code', 'is_priority', 'avg_monthly_spend', 'satisfaction_score']
+Y_COLUMNS = ['churn_risk', 'lifetime_value']
 
 # --- Run Analysis ---
 try:
     # Run analysis and save the results
     results = run_bootstrap_analysis(
-        csv_filepath=INPUT_CSV,
-        x_cols=X_COLS,
-        y_cols=Y_COLS,
-        n_samples=100,           # Generate 100 bootstrap samples
-        bootstrap_sample_size=None, # Use full original size for samples
-        stratify_by='X',         # Stratify based on categorical features in X_COLS
+        csv_filepath=full_path_csv,
+        x_cols=X_COLUMNS,           
+        y_cols=Y_COLUMNS,
+        n_samples=50,           # Generate 50 bootstrap samples
+        bootstrap_sample_size=100, # generate bootstrap samples with 100 rows each; None: Use full original size of input data for the samples ;
+        stratify_by='X',         # Stratify based on categorical features in X_COLS; 'Y','both' are other options
         random_state=42,         # For reproducible results
         save_results_path=RESULTS_FILE # Save the output
     )
@@ -95,3 +87,4 @@ except Exception as e:
 #     print(f"Number of samples in loaded results: {len(loaded_results['bootstrap_samples'])}")
 # except Exception as e:
 #     print(f"Failed to load results: {e}")
+```
