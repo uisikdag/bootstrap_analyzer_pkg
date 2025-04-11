@@ -23,7 +23,7 @@ A Python package for analyzing data features and generating (stratified) bootstr
 
 1.  **Clone the repository (if applicable):**
     ```bash
-    git clone [https://github.com/yourusername/bootstrap_analyzer.git](https://github.com/yourusername/bootstrap_analyzer.git) # Replace with actual URL if hosted
+    git clone [https://github.com/uisikdag/bootstrap_analyzer_pkg.git](https://github.com/uisikdag/bootstrap_analyzer_pkg.git) # Replace with actual URL if hosted
     cd bootstrap_analyzer_pkg
     ```
 
