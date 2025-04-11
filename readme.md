@@ -31,8 +31,7 @@ A Python package for analyzing data features and generating (stratified) bootstr
 ## Example Usage Code
 
 ```python
-from bootstrap_analyzer import run_bootstrap_analysis, load_bootstrap_results
-import pandas as pd # Needed to display results if desired
+from bootstrap_analyzer import run_bootstrap_analysis
 import os
 
 # --- Parameters ---
