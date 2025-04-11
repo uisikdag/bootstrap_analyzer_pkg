@@ -16,8 +16,9 @@ A Python package for analyzing data features and generating (stratified) bootstr
 
 1.  **Clone the repository (if applicable):**
     ```
-    git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git # Replace with actual URL if hosted
-    cd bootstrap_analyzer_pkg
+    git clone https://github.com/uisikdag/bootstrap_analyzer_pkg.git
+    cd bootstrap_analyzer_pkg/examples
+    python3 run_analysis_example.py
     ```
 
 2.  **Install using pip:**
@@ -29,11 +30,14 @@ A Python package for analyzing data features and generating (stratified) bootstr
 ## Usage
 
 ```python
+#download synthetic_bootstrap_data.csv to the same folder with this code
+#paste this code to an editor and save as "analysis_example.py"
+ 
 from bootstrap_analyzer import run_bootstrap_analysis, load_bootstrap_results
 import pandas as pd # Needed to display results if desired
 
 # --- Parameters ---
-INPUT_CSV = "path/to/your/data.csv" # REQUIRED: Update this path
+INPUT_CSV = "synthetic_bootstrap_data.csv" # REQUIRED: Update this path
 RESULTS_FILE = "analysis_output.pkl" # Optional: Path to save/load results
 
 # Define which columns are independent (X) and dependent (Y) variables
