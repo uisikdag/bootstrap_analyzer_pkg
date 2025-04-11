@@ -50,11 +50,11 @@ try:
     # Run analysis and save the results
     results = run_bootstrap_analysis(
         csv_filepath=INPUT_CSV,
-        x_cols=X_COLS,
+        x_cols=X_COLS,           
         y_cols=Y_COLS,
         n_samples=100,           # Generate 100 bootstrap samples
-        bootstrap_sample_size=None, # Use full original size for samples
-        stratify_by='X',         # Stratify based on categorical features in X_COLS
+        bootstrap_sample_size=None, # Use full original size for samples ; =1000 will generate data samples with 1000 rows each
+        stratify_by='X',         # Stratify based on categorical features in X_COLS; 'Y','both' are other options
         random_state=42,         # For reproducible results
         save_results_path=RESULTS_FILE # Save the output
     )
