@@ -26,8 +26,8 @@ A Python package for analyzing data features and generating (stratified) bootstr
     pip install git+https://github.com/uisikdag/bootstrap_analyzer_pkg.git
     #read the Usage 
     ```
-download synthetic_bootstrap_data.csv to the same folder with Example Usage Code
-copy/paste  Example Usage Code code to an editor and save as "euc.py"
+* download synthetic_bootstrap_data.csv to the same folder with Example Usage Code
+* copy/paste  Example Usage Code code to an editor and save as "euc.py"
 
 ## Example Usage Code
 
