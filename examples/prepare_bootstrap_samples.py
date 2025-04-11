@@ -26,7 +26,7 @@ Y_COLUMNS = ['class']
 
 # Bootstrap settings
 NUM_BOOTSTRAP_SAMPLES = 500
-BOOTSTRAP_SIZE = 100      # Custom size for samples
+BOOTSTRAP_SIZE = 150      # Custom size for samples
 #STRATIFICATION_METHOD = 'X'
 STRATIFICATION_METHOD = 'Y'
 RANDOM_SEED = 123

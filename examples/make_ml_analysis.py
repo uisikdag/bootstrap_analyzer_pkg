@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 11 14:30:00 2025 # Adjusted time
-
-@author: umit
-"""
-
 import os
 import pandas as pd
 import numpy as np
