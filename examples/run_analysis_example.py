@@ -15,12 +15,12 @@ import pandas as pd # Import pandas to work with results if needed
 import os # To construct file paths relative to this script
 
 # --- Parameters ---
-# Assuming the example CSV is in the main project directory, one level up
-# Adjust the path based on where you run this script from / where your data is
-EXAMPLE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(EXAMPLE_DIR)
-INPUT_CSV = os.path.join(PROJECT_ROOT, "synthetic_bootstrap_data.csv") # Assumes it exists
-RESULTS_FILE = os.path.join(PROJECT_ROOT, "example_analysis_output.pkl") # Where to save results
+INPUT_CSV = "synthetic_bootstrap_data.csv" # REQUIRED: Update this path
+RESULTS_FILE = "analysis_output.pkl" # Optional: Path to save/load results
+
+# --- Path Settings ---
+current_working_directory = os.getcwd()
+full_path_csv = os.path.join(current_working_directory, INPUT_CSV)
 
 # Define column names expected in the CSV
 # IMPORTANT: Update these lists if using a different CSV file
@@ -38,7 +38,7 @@ print(f"Input CSV: {INPUT_CSV}")
 print(f"Results File: {RESULTS_FILE}")
 
 # Check if input CSV exists
-if not os.path.exists(INPUT_CSV):
+if not os.path.exists(full_path_csv):
     print(f"\nError: Input CSV file not found at '{INPUT_CSV}'.")
     print("Please create the 'synthetic_bootstrap_data.csv' file (e.g., using code from previous steps) in the project root directory or update the INPUT_CSV path.")
     exit()
